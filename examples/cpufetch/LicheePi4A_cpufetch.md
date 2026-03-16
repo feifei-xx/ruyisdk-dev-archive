@@ -101,7 +101,7 @@ make
 cd ..
 
 # 退出 Ruyi 虚拟环境
-ruyi venv deactivate
+ruyi-deactivate
 ```
 
 ![image-20260316160734575](./images/image-20260316160734575.png)
