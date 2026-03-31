@@ -15,24 +15,32 @@ cpufetch
 
 ## 方法二
 
-#步骤 1：安装编译依赖工具
-sudo apt update
-sudo apt install -y git gcc make
-#验证依赖是否安装成功：
-gcc --version 
-make --version 
+#更新 Ruyi 索引并安装工具链
+ruyi update
+ruyi install gnu-plct-xthead
+#创建并激活 ruyi 虚拟环境
+# 创建虚拟环境，命名为 dhrystone-venv，使用 sipeed-lpi4a profile
+ruyi venv -t gnu-plct-xthead sipeed-lpi4a cpufetch-venv
 
-#步骤 2：克隆 cpufetch 源码仓库
+# 进入虚拟环境目录
+cd cpufetch-venv
+
+# 激活虚拟环境
+source ./bin/ruyi-activate
+
+#验证GCC版本
+riscv64-plctxthead-linux-gnu-gcc --version
+make --version
+
+#克隆cpufetch源码并编译
 git clone https://github.com/Dr-Noob/cpufetch.git
 cd cpufetch
 
-#步骤 3：直接编译
+#直接使用 make 编译（Makefile 会自动检测架构）：
 make
-#编译过程中若出现报错（如 “找不到 stdio.h”）,大概率是缺少 libc 开发库，补充安装：
-sudo apt install -y libc6-dev
-make clean && make # 清理后重新编译
 
-#步骤 4：运行本地编译版本
+
+#运行本地编译版本
 ./cpufetch
 
 ## 进阶用法
